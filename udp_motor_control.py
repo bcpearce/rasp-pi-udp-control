@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import sys
 from motor_driver import MotorDriver
+from async_udp_receiver import AsyncUdpReceiver
 
 if __name__ == "__main__":
     PIN_DICT = {'ENA':21, 'ENB':16, 
@@ -16,9 +17,10 @@ if __name__ == "__main__":
     servo1.set_fwd()
     servo2.set_fwd()
 
-    server = AsyncUdpReceiver(sys.argv[1], 5000, servo1, servo2)
-    print "Waiting for data..."
-    asyncore.loop()
+    try:
+        server = AsyncUdpReceiver(sys.argv[1], 5000, servo1, servo2)
+        print "Waiting for data..."
+        asyncore.loop()
 
     finally:
         servo1.stop()
