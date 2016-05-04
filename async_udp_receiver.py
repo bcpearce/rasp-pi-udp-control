@@ -7,11 +7,13 @@ class AsyncUdpReceiver(asyncore.dispatcher):
         # open as udp socket
         self.create_socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.bind((host, port))
+
+        self.rservo = rservo
         if rservo:
-            self.rservo = rservo
             self.rservo.start(0)
+
+        self.lservo = lservo 
         if lservo:
-            self.lservo = lservo 
             self.lservo.start(0)
 
     def handle_connect(self):
@@ -31,8 +33,8 @@ class AsyncUdpReceiver(asyncore.dispatcher):
             self.drive()
 
     def drive(self):
-        self.rservo.set_dir(self.rdir)
-        self.lservo.set_dir(self.ldir)
+        self.rservo.set_direction(self.rdir)
+        self.lservo.set_direction(self.ldir)
         self.rservo.set_spd(self.rpwr)
         self.lservo.set_spd(self.lpwr)
         print "driving {0}@{1}  {2}@{3}".format(
