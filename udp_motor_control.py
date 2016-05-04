@@ -14,6 +14,12 @@ if __name__ == "__main__":
         for val in PIN_DICT.values():
             GPIO.setup(val, GPIO.OUT)
 
+        # set up pins to operate motors
+        GPIO.output(PIN_DICT['IN1'], 1)
+        GPIO.output(PIN_DICT['IN2'], 0)
+        GPIO.output(PIN_DICT['IN3'], 1)
+        GPIO.output(PIN_DICT['IN4'], 0)
+
         # run at 50Hz
         servo1 = GPIO.PWM(PIN_DICT['ENA'], 50)
         servo2 = GPIO.PWM(PIN_DICT['ENB'], 50)
