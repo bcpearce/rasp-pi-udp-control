@@ -17,7 +17,7 @@ class AsyncUdpReceiver(asyncore.dispatcher):
             self.lservo.start(0)
 
         self.kp = kwargs.get('pk', 1)
-        self.kd = kwargs.get('pd', 0.5)
+        self.kd = kwargs.get('pd', 0.25)
 
         self.rpwr = 0
         self.lpwr = 0
@@ -26,6 +26,8 @@ class AsyncUdpReceiver(asyncore.dispatcher):
         pass
 
     def handle_close(self):
+        self.adjust_speeds((0, 0))
+        self.drive()
         self.close()
 
     def adjust_speeds(spds):
