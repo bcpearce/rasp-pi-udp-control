@@ -28,6 +28,7 @@ class MotorDriver:
         self.pwm.stop()
 
     def set_spd(self, duty_pct):
+        self.spd = duty_pct
         self.pwm.ChangeDutyCycle(duty_pct)
 
     def set_fwd(self):
@@ -37,5 +38,17 @@ class MotorDriver:
     def set_rev(self):
         GPIO.output(self.ctrl_pins[0], 0)
         GPIO.output(self.ctrl_pins[1], 1)
+
+    def set_off(self):
+        GPIO.output(self.ctrl_pins[0], 0)
+        GPIO.output(self.ctrl_pins[1], 0)
+
+    def set_direction(self, direction):
+        if direction.lower() == 'rev':
+            self.set_rev()
+        elif direction.lower() == 'fwd':
+            self.set_fwd()
+        else:
+            self.set_off()
 
 

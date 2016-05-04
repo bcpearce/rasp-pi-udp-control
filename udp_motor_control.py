@@ -16,12 +16,9 @@ if __name__ == "__main__":
     servo1.set_fwd()
     servo2.set_fwd()
 
-    servo1.start(float(sys.argv[1]))
-    servo2.start(float(sys.argv[1]))
-
-    try:
-        while True:
-            pass
+    server = AsyncUdpReceiver(sys.argv[1], 5000, servo1, servo2)
+    print "Waiting for data..."
+    asyncore.loop()
 
     finally:
         servo1.stop()
