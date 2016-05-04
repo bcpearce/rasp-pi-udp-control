@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import sys
+import sys, asyncore
 from motor_driver import MotorDriver
 from async_udp_receiver import AsyncUdpReceiver
 
