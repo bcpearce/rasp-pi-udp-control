@@ -30,7 +30,7 @@ class AsyncUdpReceiver(asyncore.dispatcher):
         self.drive()
         self.close()
 
-    def adjust_speeds(spds):
+    def adjust_speeds(self, spds):
 
         # adjust for p-d control
         new_rpwr = float(spds[0])
