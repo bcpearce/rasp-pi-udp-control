@@ -1,5 +1,6 @@
 #!/usr/bin/python
 import RPi.GPIO as GPIO
+from motor_driver import MotorDriver
 
 if __name__ == "__main__":
 
@@ -8,24 +9,14 @@ if __name__ == "__main__":
                     'IN1':13, 'IN2':20, 
                     'IN3':26, 'IN4':19}
 
-        GPIO.setmode(GPIO.BCM)
+        s1_pins = [PIN_DICT[key] for key in ['ENA', 'IN1', 'IN2']]
+        servo1 = MotorDriver(*s1_pins)
 
-        # all pins are output
-        for val in PIN_DICT.values():
-            GPIO.setup(val, GPIO.OUT)
+        s2_pins = [PIN_DICT[key] for key in ['ENB', 'IN3', 'IN4']]
+        servo2 = MotorDriver(*s2_pins)
 
-        # set up pins to operate motors
-        GPIO.output(PIN_DICT['IN1'], 1)
-        GPIO.output(PIN_DICT['IN2'], 0)
-        GPIO.output(PIN_DICT['IN3'], 1)
-        GPIO.output(PIN_DICT['IN4'], 0)
-
-        # run at 50Hz
-        servo1 = GPIO.PWM(PIN_DICT['ENA'], 50)
-        servo2 = GPIO.PWM(PIN_DICT['ENB'], 50)
-
-        servo1.start(50.0)
-        servo2.start(50.0)
+        servo1.start(10)
+        servo2.start(10)
 
         while True:
             pass
