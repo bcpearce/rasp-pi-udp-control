@@ -26,8 +26,9 @@ class AsyncUdpReceiver(asyncore.dispatcher):
         pass
 
     def handle_close(self):
-        self.adjust_speeds((0, 0))
-        self.drive()
+        while self.rpwr > 1 and self.lpwr > 1:
+            self.adjust_speeds((0, 0))
+            self.drive()
         self.close()
 
     def adjust_speeds(self, spds):
