@@ -18,7 +18,7 @@ class MotorDriver:
 
         # set spd pin to PWM, default to 50Hz
         GPIO.setup(pin, GPIO.OUT)
-        self.pwm = GPIO.PWM(PIN_DICT['ENA'], kwargs.get('hz', 50))
+        self.pwm = GPIO.PWM(self.spd_pin, kwargs.get('hz', 50))
 
     def start(self, duty_pct):
         self.pwm.start(duty_pct)
