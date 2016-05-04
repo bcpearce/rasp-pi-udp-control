@@ -13,9 +13,6 @@ if __name__ == "__main__":
 
     s2_pins = [PIN_DICT[key] for key in ['ENB', 'IN3', 'IN4']]
     servo2 = MotorDriver(*s2_pins)
-    
-    servo1.set_fwd()
-    servo2.set_fwd()
 
     try:
         ip = sys.argv[1]

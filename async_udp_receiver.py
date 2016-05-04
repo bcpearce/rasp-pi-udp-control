@@ -20,6 +20,7 @@ class AsyncUdpReceiver(asyncore.dispatcher):
 
     def handle_read(self):
         msg = self.recv(1024).split()
+        print msg
         self.rpwr = float(msg[0])
         self.lpwr = float(msg[1])
         self.rdir = msg[2]
