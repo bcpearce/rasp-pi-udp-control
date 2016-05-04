@@ -29,7 +29,4 @@ class MotorDriver:
     def set_spd(self, duty_pct):
         self.pwm.ChangeDutyCycle(duty_pct)
 
-    def __del__(self):
-        self.pwm.stop()
-
 
