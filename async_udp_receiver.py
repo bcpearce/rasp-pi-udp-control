@@ -7,6 +7,8 @@ class AsyncUdpReceiver(asyncore.dispatcher):
         # open as udp socket
         self.create_socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.bind((host, port))
+        self.rservo = rservo
+        self.lservo = lservo
         self.rservo.start(0)
         self.lservo.start(0)
 
