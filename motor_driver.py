@@ -6,8 +6,7 @@ class MotorDriver:
 
     def __init__(self, spd_pin, ctrl_pin1, ctrl_pin2, **kwargs):
 
-        if GPIO.setmode() < 0:
-            GPIO.setmode(GPIO.BCM)
+        GPIO.setmode(GPIO.BCM)
 
         self.spd_pin = spd_pin
         self.ctrl_pins = (ctrl_pin1, ctrl_pin2)
