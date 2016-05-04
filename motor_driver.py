@@ -31,11 +31,11 @@ class MotorDriver:
         self.pwm.ChangeDutyCycle(duty_pct)
 
     def set_fwd(self):
-        GPIO.output(ctrl_pin1, 1)
-        GPIO.output(ctrl_pin2, 0)
+        GPIO.output(self.ctrl_pins[0], 1)
+        GPIO.output(self.ctrl_pins[1], 0)
 
     def set_rev(self):
-        GPIO.output(ctrl_pin1, 0)
-        GPIO.output(ctrl_pin2, 1)
+        GPIO.output(self.ctrl_pins[0], 0)
+        GPIO.output(self.ctrl_pins[1], 1)
 
 
