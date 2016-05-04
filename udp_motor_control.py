@@ -18,7 +18,11 @@ if __name__ == "__main__":
     servo2.set_fwd()
 
     try:
-        server = AsyncUdpReceiver(sys.argv[1], 5000, servo1, servo2)
+        ip = sys.argv[1]
+        port = 5000
+        server = AsyncUdpReceiver(ip, port, servo1, servo2)
+        print 
+        print "Opening socket on {0}:{1}".format(ip, port)
         print "Waiting for data..."
         asyncore.loop()
 
