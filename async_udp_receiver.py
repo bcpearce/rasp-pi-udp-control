@@ -2,7 +2,7 @@ import asyncore, socket, sys
 
 class AsyncUdpReceiver(asyncore.dispatcher):
 
-    def __init__(self, host, port, rservo=None, lservo=None):
+    def __init__(self, host, port, rservo=None, lservo=None, **kwargs):
         asyncore.dispatcher.__init__(self)
         # open as udp socket
         self.create_socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -16,21 +16,37 @@ class AsyncUdpReceiver(asyncore.dispatcher):
         if lservo:
             self.lservo.start(0)
 
+        self.kp = kwargs.get('pk', 1)
+        self.kd = kwargs.get('pd', 0.5)
+
+        self.rpwr = 0
+        self.lpwr = 0
+
     def handle_connect(self):
         pass
 
     def handle_close(self):
         self.close()
 
+    def adjust_speeds(spds):
+
+        # adjust for p-d control
+        new_rpwr = float(spds[0])
+        new_lpwr = float(spds[1])
+
+        self.rpwr = self.kp * new_rpwr - self.kd * (new_rpwr - self.rpwr)
+        self.lpwr = self.kp * new_lpwr - self.kd * (new_lpwr - self.lpwr)
+        
+        if self.rpwr > 100.0:
+            self.rpwr = 100.0
+        
+        if self.lpwr > 100.0:
+            self.lpwr = 100.0
+
     def handle_read(self):
         msg = self.recv(1024).split()
         print msg
-        self.rpwr = float(msg[0])
-        if self.rpwr > 100.0:
-            self.rpwr = 100.0
-        self.lpwr = float(msg[1])
-        if self.lpwr > 100.0:
-            self.lpwr = 100.0
+        self.adjust_speeds((msg[0], msg[1]))
         self.rdir = msg[2]
         self.ldir = msg[3]
         if self.rservo and self.lservo:
