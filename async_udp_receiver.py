@@ -26,7 +26,11 @@ class AsyncUdpReceiver(asyncore.dispatcher):
         msg = self.recv(1024).split()
         print msg
         self.rpwr = float(msg[0])
+        if self.rpwr > 100.0:
+            self.rpwr = 100.0
         self.lpwr = float(msg[1])
+        if self.lpwr > 100.0:
+            self.lpwr = 100.0
         self.rdir = msg[2]
         self.ldir = msg[3]
         if self.rservo and self.lservo:
