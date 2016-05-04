@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import RPi.GPIO as GPIO
+
 from motor_driver import MotorDriver
 
 if __name__ == "__main__":

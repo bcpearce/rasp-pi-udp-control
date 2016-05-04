@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+import RPi.GPIO as GPIO
+
 class MotorDriver:
 
     def __init__(self, spd_pin, ctrl_pin1, ctrl_pin2, **kwargs):
