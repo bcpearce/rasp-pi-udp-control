@@ -54,9 +54,7 @@ class MotorDriver:
 
 if __name__ == "__main__":
 
-    PIN_DICT = {'ENA':21, 'ENB':16, 
-                'IN1':13, 'IN2':20, 
-                'IN3':26, 'IN4':19}
+    PIN_DICT = json.load(open('pins.json'))
 
     s1_pins = [PIN_DICT[key] for key in ['ENA', 'IN1', 'IN2']]
     servo1 = MotorDriver(*s1_pins)

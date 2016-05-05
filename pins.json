@@ -1,0 +1,2 @@
+{"ENA": 21, "ENB": 16, "IN4": 19, "IN1": 13, "IN2": 20, "IN3": 26, 
+"HELP":"Use this file to set the GPIO pins that are used by the L298N"}
